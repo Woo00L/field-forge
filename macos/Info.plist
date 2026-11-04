@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+    <key>CFBundleExecutable</key><string>FieldForge</string>
+    <key>CFBundleIdentifier</key><string>local.fieldforge.converter</string>
+    <key>CFBundleName</key><string>字段工坊</string>
+    <key>CFBundleDisplayName</key><string>字段工坊</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>1.0.2</string>
+    <key>CFBundleVersion</key><string>3</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
+    <key>LSMinimumSystemVersion</key><string>13.3</string>
+    <key>NSPrincipalClass</key><string>NSApplication</string>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>NSSupportsAutomaticTermination</key><false/>
+    <key>LSApplicationCategoryType</key><string>public.app-category.productivity</string>
+    <key>CFBundleDevelopmentRegion</key><string>zh_CN</string>
+    <key>CFBundleLocalizations</key><array><string>zh_CN</string></array>
+    <key>NSHumanReadableCopyright</key><string>字段工坊；拼音转换使用 pinyin-pro（MIT）。</string>
+</dict></plist>
