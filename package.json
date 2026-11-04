@@ -1,0 +1,25 @@
+{
+  "name": "chinese-field-converter",
+  "version": "1.0.2",
+  "description": "离线中文字段转换工具，支持拼音首字母、相对年份、数字范围、批量复制与 CSV 导出。",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "package:mac": "node scripts/package-macos.mjs",
+    "mac:run": "bash scripts/build-and-run.sh"
+  },
+  "dependencies": {
+    "pinyin-pro": "^3.27.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

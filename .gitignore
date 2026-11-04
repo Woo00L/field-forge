@@ -1,0 +1,16 @@
+# 依赖、构建结果和安装包
+node_modules/
+/.macos-build/
+/dist/
+/字段转换器.html
+*.log
+
+# 本机配置与系统文件
+/.codex/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# 按项目约定，中文 Markdown 文档仅保留在本地
+*.md

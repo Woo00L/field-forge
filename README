@@ -1,0 +1,103 @@
+字段工坊 · 中文字段转换器
+========================
+
+将中文名称转换为拼音首字母字段，提供离线网页和 macOS 桌面版。
+转换在本机完成，不上传内容，不保存输入历史。
+当前版本：1.0.2。
+
+功能
+----
+• 每行一个名称，支持批量输入和从 Excel 粘贴。
+• 中文结果自动去掉空格，保留括号与单位；括号内容不参与字段生成。
+• 默认将年份放到英文字段末尾，也可开启相对年份转换。
+• 数字范围中的横杠表示“到”，例如 1-11月生成 1d11y。
+• 中文名称和英文字段分别复制，也支持整列复制、两列复制与 CSV 导出。
+• 检查括号、多个年份及字段重名；多音字和重名结果仍需自行核对。
+
+转换示例
+--------
+默认模式：
+  2023年营业收入 （万元） → 2023年营业收入（万元） → nyysr2023
+
+相对年份，以 2025 年为基准：
+  2023年营业收入 （万元） → 上上年营业收入（万元） → ssnyysr
+  2024年度可加计扣除研发费用（万元）
+    → 上年度可加计扣除研发费用（万元） → sndkjjkcyffy
+
+相对年份，以 2024 年为基准：
+  2023年1-11月游戏发行营收（万元）
+    → 上年1-11月游戏发行营收（万元） → sn1d11yyxfxys
+
+默认基准年为 2025，用于匹配初始示例，并非系统当前年份，可在界面修改。
+年份识别范围为 1900—2199；“年”和“年度”保留并参与首字母转换。
+
+从源码运行
+----------
+需要 Node.js 22 或更新版本，推荐 Node.js 24；版本提示见 .nvmrc。
+首次安装开发依赖需要联网，生成的离线网页和桌面应用使用时不需要联网。
+
+  npm ci
+  npm test
+  npm run build
+  npm start
+
+浏览器访问 http://127.0.0.1:5173 。默认端口可通过 PORT 环境变量调整。
+也可双击构建生成的“字段转换器.html”，直接离线使用。
+index.html 是构建模板，请使用生成文件或预览服务打开界面。
+修改源码后需重新执行 npm run build；预览服务不提供自动热更新。
+
+常用命令
+--------
+  npm test             运行转换规则测试。
+  npm run build        生成根目录下的字段转换器.html。
+  npm run dev          先构建，再启动本地预览服务。
+  npm start            启动预览服务，需先完成构建。
+  npm run package:mac  构建 macOS 通用应用和 DMG。
+  npm run mac:run      重新打包并启动 macOS 应用。
+
+macOS 打包
+----------
+只能在 macOS 上执行。需要安装 Xcode Command Line Tools，并先执行 npm ci。
+脚本使用系统的 Swift、AppKit、WebKit、iconutil、codesign 和 hdiutil。
+
+  npm run package:mac
+
+生成文件：
+  dist/字段工坊.app
+  dist/字段工坊-1.0.2-universal.dmg
+
+支持 macOS 13.3 或更新版本，包含 Apple 芯片和 Intel 两种架构。
+挂载 DMG 后，将应用拖到 Applications 文件夹。
+当前使用本地临时签名，尚未使用 Developer ID 证书签名或进行 Apple 公证；
+下载或跨电脑传输后，macOS 可能需要在“系统设置 → 隐私与安全性”中确认打开。
+
+源码结构
+--------
+  src/app.js                    界面与交互、剪贴板和导出入口
+  src/converter.js              转换、批量处理与 CSV 逻辑
+  src/styles.css                页面样式
+  src/icons.js                  矢量图标
+  tests/converter.test.js        转换规则测试
+  scripts/build.mjs             离线网页构建
+  scripts/serve.mjs             本地预览服务
+  scripts/package-macos.mjs      macOS 应用与 DMG 打包
+  scripts/build-and-run.sh       macOS 启动、验证和调试入口
+  macos/                        原生窗口、系统桥接、图标和应用信息
+  .github/workflows/ci.yml       GitHub 推送、拉取请求及手动触发的测试与构建
+  index.html                    页面构建模板
+  package-lock.json             锁定依赖版本及公共 npm 下载地址
+  THIRD_PARTY_NOTICES.txt        运行时第三方依赖的许可声明
+
+发布与维护
+----------
+源码仓库不包含 node_modules、dist、.macos-build、本机配置及生成的离线网页。
+安装包和离线网页适合作为 GitHub Releases 附件发布。
+修改功能后执行 npm test 和 npm run build；原生修改还需在 macOS 上验证打包和使用。
+更新版本时同步 package.json、package-lock.json、macos/Info.plist 和此说明。
+本地中文 Markdown 文档按项目约定由 .gitignore 排除。
+
+许可
+----
+本项目尚未选择整体开源许可证，package.json 标记为 UNLICENSED。
+pinyin-pro 使用 MIT 许可证，原文保留在 THIRD_PARTY_NOTICES.txt 以及离线网页中。
+第三方库的许可不代表本项目整体采用该许可。
